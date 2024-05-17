@@ -43,5 +43,6 @@
         <module>api</module>
         <module>application</module>
         <module>database</module>
+        <module>mensageria</module>
     </modules>
 </project>
