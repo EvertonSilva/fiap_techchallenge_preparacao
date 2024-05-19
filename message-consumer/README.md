@@ -1,4 +1,4 @@
-# br.com.lanchonete.message-consumer
+# Message Consumer Module
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
