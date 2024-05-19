@@ -38,12 +38,23 @@
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jobrunr</groupId>
+            <artifactId>jobrunr</artifactId>
+            <version>7.0.0</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.quarkus</groupId>
+            <artifactId>quarkus-core</artifactId>
+        </dependency>
     </dependencies>
 
     <modules>
         <module>api</module>
         <module>application</module>
         <module>database</module>
-        <module>mensageria</module>
+        <module>message-broker</module>
+        <module>message-consumer</module>
     </modules>
 </project>

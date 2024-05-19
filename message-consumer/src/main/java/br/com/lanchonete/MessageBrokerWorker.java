@@ -1,5 +1,6 @@
 package br.com.lanchonete;
 
+
 import br.com.lanchonete.rabbitmq.RabbitMqConsumer;
 import br.com.lanchonete.usecase.AtualizaStatusPedidoUseCase;
 
