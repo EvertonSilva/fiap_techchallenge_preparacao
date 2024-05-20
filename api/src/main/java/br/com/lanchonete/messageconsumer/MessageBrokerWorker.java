@@ -14,11 +14,10 @@ import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class MessageBrokerWorker {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MessageBrokerWorker.class);
     private final AtualizaStatusPedidoUseCase atualizaStatusUseCase;
     private final CadastraNovoPedidoUseCase cadastraPedidoUseCase;
     private final RabbitMqConsumer consumer;
-    
-    private static final Logger LOGGER = LoggerFactory.getLogger(MessageBrokerWorker.class);
 
     @Inject
     public MessageBrokerWorker(
@@ -31,20 +30,20 @@ public class MessageBrokerWorker {
     }
 
     public void getMessageNovoPedido() {
-        LOGGER.info("Try get message from queue NOVO_PEDIDO");
-        getMessageFrom("NOVO_PEDIDO", cadastraPedidoUseCase);
+        LOGGER.info("Get new orders from RabbitMQ");
+        // getMessageFrom("NOVO_PEDIDO", cadastraPedidoUseCase);
     }
 
     public void getMessagePagamentoEfetuado() {
         LOGGER.info("Try get message from queue PEDIDO_PAGO");
-        getMessageFrom("PEDIDO_PAGO", atualizaStatusUseCase);
+        // getMessageFrom("PEDIDO_PAGO", atualizaStatusUseCase);
     }
 
     private void getMessageFrom(String queueName, IUseCase useCase) {
         try {
             consumer.receive(queueName, useCase::execute);
         } catch(IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e.getMessage());
         }
     }
 }

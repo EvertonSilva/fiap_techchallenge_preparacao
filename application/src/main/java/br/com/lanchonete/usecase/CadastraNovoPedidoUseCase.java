@@ -13,6 +13,7 @@ public class CadastraNovoPedidoUseCase implements IUseCase {
         this.dbAdapter = dbAdapter;
     }
 
+    @Override
     public void execute(String messageFromBroker) {
         try {
             var mapper = new ObjectMapper();

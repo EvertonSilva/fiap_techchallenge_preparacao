@@ -9,25 +9,34 @@ import org.slf4j.LoggerFactory;
 import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class MessageConsumerJob {
-    private final MessageBrokerWorker messageBrokerWorker;
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageConsumerJob.class);
+    private final MessageBrokerWorker worker;
 
-    @Inject
-    public MessageConsumerJob(MessageBrokerWorker messageBrokerWorker) {
-        this.messageBrokerWorker = messageBrokerWorker;
-        JobRunr.configure()
-            .useStorageProvider(new InMemoryStorageProvider())
-            .useBackgroundJobServer()
-            .useDashboard()
-            .initialize();
+    // @Inject
+    public MessageConsumerJob(MessageBrokerWorker worker) {
+        this.worker = worker;
     }
 
     void onStart(@Observes StartupEvent ev) {
-        LOGGER.info("Starting MessageConsumerJob");
-        BackgroundJob.enqueue(() -> messageBrokerWorker.getMessageNovoPedido());
+        try {
+            LOGGER.info("Initializing JobRunr and scheduling jobs");
+
+            JobRunr.configure()
+                .useStorageProvider(new InMemoryStorageProvider())
+                .useBackgroundJobServer()
+                .useDashboard()
+                .initialize();
+            
+            LOGGER.info("JobRunr initialized successfully");
+            
+            BackgroundJob.enqueue(() -> worker.getMessageNovoPedido());
+
+            LOGGER.info("Jobs scheduled successfully");
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage());
+        }
     }
 }
