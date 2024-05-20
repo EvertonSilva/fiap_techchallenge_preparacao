@@ -8,10 +8,8 @@ import jakarta.enterprise.inject.Produces;
 
 @ApplicationScoped
 public class MessageBrokerProducer {
-
     @Produces
     public RabbitMqConsumer rabbitMqConsumer() throws IOException {
         return new RabbitMqConsumer();
     }
-
 }

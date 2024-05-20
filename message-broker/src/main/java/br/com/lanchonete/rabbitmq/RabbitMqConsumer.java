@@ -1,12 +1,14 @@
 package br.com.lanchonete.rabbitmq;
 
-import com.rabbitmq.client.DeliverCallback;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Consumer;
 
+import com.rabbitmq.client.DeliverCallback;
 
+// import jakarta.enterprise.context.ApplicationScoped;
+
+// @ApplicationScoped
 public class RabbitMqConsumer extends RabbitMqActor {
 
     public RabbitMqConsumer() throws IOException {
