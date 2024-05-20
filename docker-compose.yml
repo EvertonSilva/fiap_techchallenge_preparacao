@@ -14,6 +14,8 @@ services:
   redis:
     container_name: 'preparacao-db'
     image: redis:alpine3.19
+    ports:
+      - '6379:6379'
   
   message-broker:
     container_name: 'preparacao-message-broker'

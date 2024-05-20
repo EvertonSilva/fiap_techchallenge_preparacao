@@ -11,6 +11,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>4.2.3</version>
+        </dependency>
+
+        <dependency>
             <groupId>br.com.lanchonete</groupId>
             <artifactId>application</artifactId>
             <version>${project.version}</version>

@@ -25,6 +25,10 @@ public class Pedido {
         return status;
     }
 
+    public void setStatus(String status) {
+        this.status = Status.valueOf(status);
+    }
+
     public void avancaStatus() {
         if (status == Status.AGUARDANDO_PAGAMENTO) {
             status = Status.RECEBIDO;
