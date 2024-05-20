@@ -1,15 +1,20 @@
 package br.com.lanchonete.usecase;
 
-import java.util.UUID;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.lanchonete.domain.Pedido;
+import br.com.lanchonete.infraestructure.IDatabaseAdapter;
 import br.com.lanchonete.input.PedidoMessageDTO;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
-public class AtualizaStatusPedidoUseCase implements IUseCase {
+@ApplicationScoped
+public class CadastraNovoPedidoUseCase implements IUseCase {
+    private final IDatabaseAdapter dbAdapter;
 
-    public void execute(UUID pedido, String status) {
-        System.out.println("Atualizando pedido " + pedido + " para status " + status);
+    @Inject
+    public CadastraNovoPedidoUseCase(IDatabaseAdapter dbAdapter) {
+        this.dbAdapter = dbAdapter;
     }
 
     public void execute(String messageFromBroker) {
@@ -17,7 +22,7 @@ public class AtualizaStatusPedidoUseCase implements IUseCase {
             var mapper = new ObjectMapper();
             var dto = mapper.readValue(messageFromBroker, PedidoMessageDTO.class);
             var pedido = new Pedido(dto.codigo());
-            pedido.avancaStatus();
+            dbAdapter.save(pedido);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
