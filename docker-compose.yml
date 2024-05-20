@@ -6,9 +6,15 @@ services:
     image: evsilva/fiap-techchalg-preparacao:dev
     ports:
       - '0.0.0.0:8080:8080'
+      - '0.0.0.0:8000:8000'
+    depends_on:
+      - redis
+      - message-broker
+  
   redis:
     container_name: 'preparacao-db'
     image: redis:alpine3.19
+  
   message-broker:
     container_name: 'preparacao-message-broker'
     image: rabbitmq:3.12.14-management-alpine

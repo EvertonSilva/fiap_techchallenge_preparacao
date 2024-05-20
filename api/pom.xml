@@ -12,6 +12,8 @@
         <compiler-plugin.version>3.12.1</compiler-plugin.version>
         <skipITs>true</skipITs>
         <surefire-plugin.version>3.2.5</surefire-plugin.version>
+        <jobrunr.artifactId>jobrunr</jobrunr.artifactId>
+        <jobrunr.version>7.1.2</jobrunr.version>
     </properties>
 
     <dependencies>
@@ -25,8 +27,8 @@
         </dependency>
         <dependency>
             <groupId>org.jobrunr</groupId>
-            <artifactId>jobrunr</artifactId>
-            <version>7.0.0</version>
+            <artifactId>${jobrunr.artifactId}</artifactId>
+            <version>${jobrunr.version}</version>
         </dependency>
         <dependency>
             <groupId>br.com.lanchonete</groupId>

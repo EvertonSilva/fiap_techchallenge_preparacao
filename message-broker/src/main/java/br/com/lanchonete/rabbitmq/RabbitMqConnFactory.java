@@ -1,7 +1,7 @@
 package br.com.lanchonete.rabbitmq;
 
-import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
 
 public class RabbitMqConnFactory {
     private static Connection connection;
