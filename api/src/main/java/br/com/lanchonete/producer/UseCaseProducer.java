@@ -2,7 +2,7 @@ package br.com.lanchonete.producer;
 
 import br.com.lanchonete.RedisDatabaseAdapter;
 import br.com.lanchonete.infraestructure.IDatabaseAdapter;
-// import br.com.lanchonete.usecase.AtualizaStatusPedidoUseCase;
+import br.com.lanchonete.usecase.AtualizaStatusPedidoUseCase;
 import br.com.lanchonete.usecase.CadastraNovoPedidoUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
@@ -16,8 +16,8 @@ public class UseCaseProducer {
         return new CadastraNovoPedidoUseCase(redisAdapter);
     }
 
-    // @Produces
-    // public AtualizaStatusPedidoUseCase atualizaStatusPedidoUseCaseProducer() {
-    //     return new AtualizaStatusPedidoUseCase();
-    // }
+    @Produces
+    public AtualizaStatusPedidoUseCase atualizaStatusPedidoUseCaseProducer() {
+        return new AtualizaStatusPedidoUseCase();
+    }
 }

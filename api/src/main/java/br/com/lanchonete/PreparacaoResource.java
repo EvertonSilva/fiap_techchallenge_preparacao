@@ -1,13 +1,19 @@
 package br.com.lanchonete;
 
-import br.com.lanchonete.usecase.AtualizaStatusPedidoUseCase;
+import java.util.UUID;
 
+import br.com.lanchonete.usecase.AtualizaStatusPedidoUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.*;
-
-import java.util.UUID;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.PATCH;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 
 @ApplicationScoped
 @Path("/preparacao")
@@ -24,6 +30,7 @@ public class PreparacaoResource {
     @GET
     @Path("/health")
     public Response healthCheck() {
+        var clazz = useCase.getClass();
         return Response.status(Response.Status.OK).entity("Service is running").build();
     }
 
