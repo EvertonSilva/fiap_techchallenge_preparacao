@@ -9,13 +9,14 @@ import org.slf4j.LoggerFactory;
 import io.quarkus.runtime.StartupEvent;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class MessageConsumerJob {
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageConsumerJob.class);
     private final MessageBrokerWorker worker;
 
-    // @Inject
+    @Inject
     public MessageConsumerJob(MessageBrokerWorker worker) {
         this.worker = worker;
     }
@@ -23,7 +24,8 @@ public class MessageConsumerJob {
     void onStart(@Observes StartupEvent ev) {
         try {
             LOGGER.info("Initializing JobRunr and scheduling jobs");
-
+            
+            JobRunr.destroy();
             JobRunr.configure()
                 .useStorageProvider(new InMemoryStorageProvider())
                 .useBackgroundJobServer()
