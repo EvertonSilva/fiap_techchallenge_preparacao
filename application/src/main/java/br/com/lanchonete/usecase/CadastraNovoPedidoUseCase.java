@@ -5,14 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import br.com.lanchonete.domain.Pedido;
 import br.com.lanchonete.infraestructure.IDatabaseAdapter;
 import br.com.lanchonete.input.PedidoMessageDTO;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
 
-@ApplicationScoped
 public class CadastraNovoPedidoUseCase implements IUseCase {
     private final IDatabaseAdapter dbAdapter;
 
-    @Inject
     public CadastraNovoPedidoUseCase(IDatabaseAdapter dbAdapter) {
         this.dbAdapter = dbAdapter;
     }
