@@ -24,7 +24,7 @@ public class MessageConsumerJob {
 
     void onStart(@Observes StartupEvent ev) {
         LOGGER.info("Starting MessageConsumerJob");
-        jobScheduler.<Job>scheduleRecurrently("*/1 * * * *", () -> messageBrokerWorker.getMessageNovoPedido());
-        jobScheduler.<Job>scheduleRecurrently("*/1 * * * *", () -> messageBrokerWorker.getMessagePagamentoEfetuado());
+        jobScheduler.scheduleRecurrently("*/1 * * * *", () -> messageBrokerWorker.getMessageNovoPedido());
+        jobScheduler.scheduleRecurrently("*/1 * * * *", () -> messageBrokerWorker.getMessagePagamentoEfetuado());
     }
 }
