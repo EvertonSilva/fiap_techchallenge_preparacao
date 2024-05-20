@@ -88,6 +88,6 @@
         <module>application</module>
         <module>database</module>
         <module>message-broker</module>
-        <module>message-consumer</module>
+        <!-- <module>message-consumer</module> -->
     </modules>
 </project>
