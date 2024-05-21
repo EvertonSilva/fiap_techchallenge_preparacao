@@ -15,9 +15,9 @@ public class RabbitMqConnFactory {
         if (connection == null || !connection.isOpen()) {
             try {
                 var factory = new ConnectionFactory();
-                factory.setHost("localhost");
-                factory.setUsername("fiap");
-                factory.setPassword("Rabbit!1@2#3");
+                factory.setHost("message-broker");
+                factory.setUsername("guest");
+                factory.setPassword("guest");
                 connection = factory.newConnection();
             } catch (Exception e) {
                 LOGGER.error(e.getMessage());
