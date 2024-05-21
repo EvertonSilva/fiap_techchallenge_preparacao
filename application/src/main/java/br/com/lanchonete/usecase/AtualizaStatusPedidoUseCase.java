@@ -10,7 +10,7 @@ import br.com.lanchonete.infraestructure.IDatabaseAdapter;
 import br.com.lanchonete.input.PedidoMessageDTO;
 
 public class AtualizaStatusPedidoUseCase implements IUseCase {
-     private static final Logger LOGGER = LoggerFactory.getLogger(AtualizaStatusPedidoUseCase.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AtualizaStatusPedidoUseCase.class);
     private final IDatabaseAdapter dbAdapter;
 
     public AtualizaStatusPedidoUseCase(IDatabaseAdapter dbAdapter) {

@@ -8,7 +8,7 @@ import br.com.lanchonete.config.RedisConfig;
 import br.com.lanchonete.domain.Pedido;
 import redis.clients.jedis.Jedis;
 
-public class RedisDatabaseAdapterTest {
+class RedisDatabaseAdapterTest {
     Jedis db;
     Pedido testData;
     RedisDatabaseAdapter subject;

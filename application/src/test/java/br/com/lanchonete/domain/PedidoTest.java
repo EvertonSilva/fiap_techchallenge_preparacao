@@ -1,10 +1,10 @@
 package br.com.lanchonete.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
 
-public class PedidoTest {
+class PedidoTest {
     private Pedido subject;
 
     @BeforeEach
@@ -13,20 +13,20 @@ public class PedidoTest {
     }
 
     @Test
-    public void testPedidoDeveTerCodigo() {
+    void testPedidoDeveTerCodigo() {
         var codigoPedido = "9a6b3e72-5e18-4c2f-9d3b-065b6f34597a";
         subject = new Pedido(codigoPedido);
         assertThat(subject.getCodigo()).isEqualTo(codigoPedido);
     }
 
     @Test
-    public void testStatusInicial() {
+    void testStatusInicial() {
         assertThat(subject.getStatus())
                 .isEqualTo(Status.AGUARDANDO_PAGAMENTO);
     }
 
     @Test
-    public void testAvancaStatusParaRecebido() {
+    void testAvancaStatusParaRecebido() {
         var status = subject.getStatus();
         subject.avancaStatus();
         assertThat(status).isEqualTo(Status.AGUARDANDO_PAGAMENTO);
@@ -34,7 +34,7 @@ public class PedidoTest {
     }
 
     @Test
-    public void testAvancaStatusParaEmPreparacao() {
+    void testAvancaStatusParaEmPreparacao() {
         subject.avancaStatus();
         var status = subject.getStatus();
         subject.avancaStatus();
@@ -44,7 +44,7 @@ public class PedidoTest {
     }
 
     @Test
-    public void testAvancaStatusParaPronto() {
+    void testAvancaStatusParaPronto() {
         subject.avancaStatus();
         subject.avancaStatus();
         var status = subject.getStatus();
@@ -55,7 +55,7 @@ public class PedidoTest {
     }
 
     @Test
-    public void testAvancaStatusParaFinalizado() {
+    void testAvancaStatusParaFinalizado() {
         subject.avancaStatus();
         subject.avancaStatus();
         subject.avancaStatus();

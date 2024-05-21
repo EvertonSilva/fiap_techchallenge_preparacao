@@ -47,7 +47,6 @@ public class Pedido {
 
         if (status == Status.PRONTO) {
             status = Status.FINALIZADO;
-            return;
         }
     }
 }

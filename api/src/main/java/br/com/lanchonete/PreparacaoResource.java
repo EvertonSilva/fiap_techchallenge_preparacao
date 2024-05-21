@@ -1,7 +1,5 @@
 package br.com.lanchonete;
 
-import java.util.UUID;
-
 import br.com.lanchonete.service.StatusPedidoService;
 import br.com.lanchonete.usecase.AtualizaStatusPedidoUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
@@ -33,7 +31,6 @@ public class PreparacaoResource {
     @GET
     @Path("/health")
     public Response healthCheck() {
-        var clazz = useCase.getClass();
         return Response.status(Response.Status.OK).entity("Service is running").build();
     }
 
