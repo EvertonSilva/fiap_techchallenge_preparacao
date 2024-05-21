@@ -13,7 +13,7 @@ public class PreparacaoResourceTest {
     @Test
     void testHealthCheckEndpoint() {
         given()
-          .when().get("/preparacao/health")
+          .when().get("/api/preparacao/health")
           .then()
              .statusCode(200)
              .body(is("Service is running"));
@@ -22,7 +22,7 @@ public class PreparacaoResourceTest {
     @Test
     void testDeveRetornar404PedidoNaoEncontrado() {
         var codigo = UUID.randomUUID().toString();
-        var url = String.format("/preparacao/%s/status", codigo);
+        var url = String.format("/api/preparacao/%s/status", codigo);
 
         given()
           .when().get(url)
@@ -33,7 +33,7 @@ public class PreparacaoResourceTest {
     @Test
     void testDeveRetornar200PedidoEncontrado() {
         var codigo = "9bff2023-f692-4223-86ec-926c85673fa7";
-        var url = String.format("/preparacao/%s/status", codigo);
+        var url = String.format("/api/preparacao/%s/status", codigo);
 
         given()
           .when().get(url)

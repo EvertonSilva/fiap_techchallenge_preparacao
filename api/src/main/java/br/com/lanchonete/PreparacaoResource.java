@@ -15,7 +15,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @ApplicationScoped
-@Path("/preparacao")
+@Path("/api/preparacao")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class PreparacaoResource {
@@ -35,9 +35,8 @@ public class PreparacaoResource {
     }
 
     @GET
-    @Path("/{idPedido}/status/{status}")
-    public Response getStatusPedido(@PathParam("idPedido") String idPedido, 
-                                    @PathParam("status") String status) {
+    @Path("/{idPedido}/status")
+    public Response getStatusPedido(@PathParam("idPedido") String idPedido) {
         var pedido = service.getStatusPedido(idPedido);
         if (pedido == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -49,8 +48,8 @@ public class PreparacaoResource {
     }
 
     @PATCH
-    @Path("/{idPedido}")
-    public Response atualizaStatusPedido(@PathParam("idPedido") String idPedido, @QueryParam("status") String status) {
+    @Path("/{idPedido}/status/{status}")
+    public Response atualizaStatusPedido(@PathParam("idPedido") String idPedido, @PathParam("status") String status) {
         useCase.execute(idPedido, status);
         return Response.status(Response.Status.OK).build();
     }
