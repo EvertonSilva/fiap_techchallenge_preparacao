@@ -7,23 +7,20 @@ services:
     ports:
       - '0.0.0.0:8080:8080'
       - '0.0.0.0:8000:8000'
+    networks:
+      - fiap-lanchonete
     depends_on:
       - redis
-      - message-broker
   
   redis:
     container_name: 'preparacao-db'
     image: redis:alpine3.19
     ports:
       - '6379:6379'
-  
-  message-broker:
-    container_name: 'preparacao-message-broker'
-    image: rabbitmq:3.12.14-management-alpine
-    ports:
-      - "25672:25672"
-      - "15672:15672"
-      - "5672:5672"
-    environment:
-      - RABBITMQ_DEFAULT_USER=fiap
-      - RABBITMQ_DEFAULT_PASS=Rabbit!1@2#3
+    networks:
+      - fiap-lanchonete
+
+networks:
+  fiap-lanchonete:
+    name: fiap-lanchonete-network
+    driver: bridge
