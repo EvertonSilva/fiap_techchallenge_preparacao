@@ -23,11 +23,11 @@ public class Worker {
     private RabbitMqConsumer consumer;
 
     public void getMessageNovoPedido() {
-        proccessMessageFrom("NOVO_PEDIDO", cadastraPedidoUseCase);
+        proccessMessageFrom("NOVOS_PEDIDOS", cadastraPedidoUseCase);
     }
 
     public void getMessagePagamentoEfetuado() {
-        proccessMessageFrom("PEDIDO_PAGO", atualizaStatusUseCase);
+        proccessMessageFrom("PAGAMENTOS_PROCESSADOS", atualizaStatusUseCase);
     }
 
     private void proccessMessageFrom(String queueName, IUseCase useCase) {

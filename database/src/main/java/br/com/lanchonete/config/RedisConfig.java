@@ -29,7 +29,7 @@ public class RedisConfig {
                     poolConfig.setNumTestsPerEvictionRun(3);
                     poolConfig.setBlockWhenExhausted(true);
                     
-                    RedisConfig.pool = pool = new JedisPool(poolConfig, "localhost", 6379, 2000);
+                    RedisConfig.pool = pool = new JedisPool(poolConfig, "redis", 6379, 2000);
                 }
             }
         }
