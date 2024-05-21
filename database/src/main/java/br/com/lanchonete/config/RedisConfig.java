@@ -8,11 +8,14 @@ import redis.clients.jedis.JedisPoolConfig;
 
 public class RedisConfig {
 
-    private static JedisPool pool = null;
+    private static volatile JedisPool pool = null;
 
     public static JedisPool getJedisPool() {
+        JedisPool pool = RedisConfig.pool;
+        
         if (pool == null) {
             synchronized (RedisConfig.class) {
+                pool = RedisConfig.pool;
                 if (pool == null) {
                     JedisPoolConfig poolConfig = new JedisPoolConfig();
                     poolConfig.setMaxTotal(128);
@@ -26,7 +29,7 @@ public class RedisConfig {
                     poolConfig.setNumTestsPerEvictionRun(3);
                     poolConfig.setBlockWhenExhausted(true);
                     
-                    pool = new JedisPool(poolConfig, "localhost", 6379, 2000);
+                    RedisConfig.pool = pool = new JedisPool(poolConfig, "localhost", 6379, 2000);
                 }
             }
         }
