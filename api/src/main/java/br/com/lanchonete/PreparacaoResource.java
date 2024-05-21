@@ -35,8 +35,9 @@ public class PreparacaoResource {
     }
 
     @GET
-    @Path("/{idPedido}/status")
-    public Response getStatusPedido(@PathParam("idPedido") String idPedido) {
+    @Path("/{idPedido}/status/{status}")
+    public Response getStatusPedido(@PathParam("idPedido") String idPedido, 
+                                    @PathParam("status") String status) {
         var pedido = service.getStatusPedido(idPedido);
         if (pedido == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
