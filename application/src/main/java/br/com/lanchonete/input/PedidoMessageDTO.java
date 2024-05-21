@@ -1,7 +1,15 @@
 package br.com.lanchonete.input;
 
-import java.util.UUID;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
-public class PedidoMessageDTO {
-    UUID id;
-}
+public record PedidoMessageDTO(
+    String codigo,
+    String nomeCliente,
+    String emailCliente,
+    String cpfCliente,
+    Date data,
+    BigDecimal valorTotal,
+    List<ItemPedidoDTO> itens
+) {}

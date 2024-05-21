@@ -18,8 +18,9 @@ ENV SPRING_PROFILE prod
 RUN mkdir api application database
 COPY --from=builder /app/api/target ./api/target
 COPY --from=builder /app/application/target ./application/target
+COPY --from=builder /app/message-broker/target/ ./messsage-broker/target
 COPY --from=builder /app/database/target ./database/target
 
 EXPOSE 8080
 
-CMD ["/bin/sh", "-c", "java -jar api/target/api-*.jar"]
+CMD ["/bin/sh", "-c", "java -jar api/target/quarkus-app/quarkus-run.jar"]
