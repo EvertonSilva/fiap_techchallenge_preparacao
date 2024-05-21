@@ -22,10 +22,6 @@ public class Worker {
     @Inject
     private RabbitMqConsumer consumer;
 
-    public void init() {
-        LOGGER.info("MAS QUE CARALAHA!!!!");
-    }
-
     public void getMessageNovoPedido() {
         proccessMessageFrom("NOVO_PEDIDO", cadastraPedidoUseCase);
     }

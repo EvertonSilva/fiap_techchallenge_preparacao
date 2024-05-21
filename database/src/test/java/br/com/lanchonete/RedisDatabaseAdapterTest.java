@@ -1,9 +1,6 @@
 package br.com.lanchonete;
 
-import java.util.UUID;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,14 +16,14 @@ public class RedisDatabaseAdapterTest {
     @BeforeEach
     void setUp() {
         subject = new RedisDatabaseAdapter();
-        testData = new Pedido(UUID.randomUUID().toString());
+        testData = new Pedido("9bff2023-f692-4223-86ec-926c85673fa7");
         db = RedisConfig.getJedis();
     }
 
-    @AfterEach
-    void tearDown() {
-        db.flushDB();
-    }
+    // @AfterEach
+    // void tearDown() {
+    //     db.flushDB();
+    // }
 
     @Test
     void testSalvaStatusDoPedido() {

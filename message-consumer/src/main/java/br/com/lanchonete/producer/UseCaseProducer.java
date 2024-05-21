@@ -18,6 +18,7 @@ public class UseCaseProducer {
 
     @Produces
     public AtualizaStatusPedidoUseCase atualizaStatusPedidoUseCaseProducer() {
-        return new AtualizaStatusPedidoUseCase();
+        IDatabaseAdapter redisAdapter = new RedisDatabaseAdapter();
+        return new AtualizaStatusPedidoUseCase(redisAdapter);
     }
 }

@@ -2,6 +2,7 @@ package br.com.lanchonete;
 
 import java.util.UUID;
 
+import br.com.lanchonete.service.StatusPedidoService;
 import br.com.lanchonete.usecase.AtualizaStatusPedidoUseCase;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -21,10 +22,12 @@ import jakarta.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class PreparacaoResource {
     AtualizaStatusPedidoUseCase useCase;
+    StatusPedidoService service;
 
     @Inject
-    public PreparacaoResource(AtualizaStatusPedidoUseCase useCase) {
+    public PreparacaoResource(AtualizaStatusPedidoUseCase useCase, StatusPedidoService service) {
         this.useCase = useCase;
+        this.service = service;
     }
 
     @GET
@@ -35,21 +38,21 @@ public class PreparacaoResource {
     }
 
     @GET
-    public Response getStatusTodosPedidos() {
-        return Response.status(Response.Status.OK).build();
-    }
-
-    @GET
     @Path("/{idPedido}/status")
-    public Response getStatusPedido(@PathParam("idPedido") UUID idPedido) {
+    public Response getStatusPedido(@PathParam("idPedido") String idPedido) {
+        var pedido = service.getStatusPedido(idPedido);
+        if (pedido == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        
         return Response.status(Response.Status.OK)
-                .entity("Status do pedido " + idPedido)
+                .entity(pedido)
                 .build();
     }
 
     @PATCH
     @Path("/{idPedido}")
-    public Response atualizaStatusPedido(@PathParam("idPedido") UUID idPedido, @QueryParam("status") String status) {
+    public Response atualizaStatusPedido(@PathParam("idPedido") String idPedido, @QueryParam("status") String status) {
         useCase.execute(idPedido, status);
         return Response.status(Response.Status.OK).build();
     }

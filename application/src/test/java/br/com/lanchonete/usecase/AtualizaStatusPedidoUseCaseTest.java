@@ -1,15 +1,24 @@
 package br.com.lanchonete.usecase;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
+import br.com.lanchonete.infraestructure.IDatabaseAdapter;
 
 public class AtualizaStatusPedidoUseCaseTest {
+    @Mock
+    private IDatabaseAdapter dbAdapter;
+
+    @InjectMocks
     private AtualizaStatusPedidoUseCase subject;
 
     @BeforeEach
     void setUp() {
-        subject = new AtualizaStatusPedidoUseCase();
+        MockitoAnnotations.openMocks(this);
     }
 
     @Test

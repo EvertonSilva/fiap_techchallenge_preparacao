@@ -32,9 +32,13 @@ public class RedisDatabaseAdapter implements IDatabaseAdapter {
         var pedido = new Pedido();
         try {
             String status = db.get(codigo);
+            if (status == null) {
+                return null;
+            }
             pedido.setCodigo(codigo);
             pedido.setStatus(status);
         } catch (Exception e) {
+            LOGGER.error(e.getLocalizedMessage());
         }
         return pedido;
     }

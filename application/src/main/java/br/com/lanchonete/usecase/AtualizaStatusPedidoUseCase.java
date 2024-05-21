@@ -1,15 +1,30 @@
 package br.com.lanchonete.usecase;
 
-import java.util.UUID;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.lanchonete.domain.Pedido;
+import br.com.lanchonete.infraestructure.IDatabaseAdapter;
 import br.com.lanchonete.input.PedidoMessageDTO;
 
 public class AtualizaStatusPedidoUseCase implements IUseCase {
+     private static final Logger LOGGER = LoggerFactory.getLogger(AtualizaStatusPedidoUseCase.class);
+    private final IDatabaseAdapter dbAdapter;
 
-    public void execute(UUID pedido, String status) {
-        System.out.println("Atualizando pedido " + pedido + " para status " + status);
+    public AtualizaStatusPedidoUseCase(IDatabaseAdapter dbAdapter) {
+        this.dbAdapter = dbAdapter;
+    }
+
+    public void execute(String idPedido, String status) {
+        var pedido = dbAdapter.findByCodigo(idPedido);
+        if (pedido == null) {
+            LOGGER.warn("Pedido com código {}, não encontardo.", idPedido);
+            return;
+        }
+        pedido.setStatus(status);
+        dbAdapter.save(pedido);
     }
 
     public void execute(String messageFromBroker) {
@@ -18,8 +33,9 @@ public class AtualizaStatusPedidoUseCase implements IUseCase {
             var dto = mapper.readValue(messageFromBroker, PedidoMessageDTO.class);
             var pedido = new Pedido(dto.codigo());
             pedido.avancaStatus();
+            dbAdapter.save(pedido);
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOGGER.error(ex.getMessage());
         }
     }
 }
