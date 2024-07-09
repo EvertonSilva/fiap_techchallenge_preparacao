@@ -23,7 +23,7 @@ public class Worker {
     private RabbitMqConsumer consumer;
 
     public void getMessageNovoPedido() {
-        proccessMessageFrom("NOVOS_PEDIDOS", cadastraPedidoUseCase);
+        proccessMessageFrom("NOVOS_PEDIDOS_PARA_PREPARACAO", cadastraPedidoUseCase);
     }
 
     public void getMessagePagamentoEfetuado() {
